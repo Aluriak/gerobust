@@ -1,0 +1,11 @@
+*.pyc
+__pycache__/
+venv/
+*.vim
+*.logs
+asp_materials/
+graffunc.egg-info/
+dist/
+.cache/
+*.so
+*.egg-info/

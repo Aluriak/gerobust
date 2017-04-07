@@ -1,0 +1,2 @@
+PACKAGE_NAME = 'gerobust'
+PACKAGE_VERSION = '0.2.0'
