@@ -1,5 +1,5 @@
 import os
-from setuptools   import setup, find_packages
+from setuptools   import setup, find_packages, Extension
 from pip.req      import parse_requirements
 from pip.download import PipSession
 
@@ -32,7 +32,9 @@ setup(
     packages = find_packages(),
     include_package_data = True,  # read the MANIFEST.in file
     install_requires = reqs,
-    test_requires = ['pytest==3.0.7'],
+    ext_modules = [Extension('gerobust.lib_predicates', ['gerobust/predicates.c'],
+                             extra_compile_args=['-frounding-math', '-fsignaling-nans', '-fPIC', '-shared', '-O3'],
+                             libraries=['lib_predicates.so'])],
 
     author = "lucas bourneuf",
     author_email = "lucas.bourneuf@openmailbox.org",
