@@ -4260,3 +4260,153 @@ REAL *pe;
 
   return insphereadapt(pa, pb, pc, pd, pe, permanent);
 }
+
+/*****************************************************************************/
+/*                                                                           */
+/*  pred_incirclefast()   Approximate 3D incircle test.  Nonrobust.          */
+/*  pred_incircle()   Adaptive exact 3D incircle test.  Robust.              */
+/*  pred_incirclefast_strict()   Approximate 3D incircle test.  Nonrobust.   */
+/*  pred_incircle_strict()   Adaptive exact 3D incircle test.  Robust.       */
+/*                                                                           */
+/*               Return True if the point pd lies inside the                 */
+/*               circle passing through pa, pb, and pc; False                */
+/*               if it lies outside or if points are colinear;               */
+/*               and True if the four points are cocircular.                 */
+/*               If the points pa, pb and pc are ordered                     */
+/*               so that they have a positive orientation (as defined by     */
+/*               orient3d()), the sign of the result will be reversed.       */
+/*                                                                           */
+/*  strict versions return False when points are cocircular.                 */
+/*  strict versions return False when points are cocircular.                 */
+/*                                                                           */
+/*****************************************************************************/
+
+_Bool pred_incirclefast(pa, pb, pc, pd)
+REAL *pa;
+REAL *pb;
+REAL *pc;
+REAL *pd;
+{
+  REAL orientation = orient2dfast(pa, pb, pc);
+  if(orientation > 0.0)
+      return incirclefast(pa, pb, pc, pd) >= 0.0;
+  else if(orientation < 0.0)
+      return incirclefast(pa, pc, pb, pd) >= 0.0;
+  else  /* colinear points */
+      return 0;
+}
+
+_Bool pred_incircle(pa, pb, pc, pd)
+REAL *pa;
+REAL *pb;
+REAL *pc;
+REAL *pd;
+{
+  REAL orientation = orient2d(pa, pb, pc);
+  if(orientation > 0.0)
+      return incircle(pa, pb, pc, pd) >= 0.0;
+  else if(orientation < 0.0)
+      return incircle(pa, pc, pb, pd) >= 0.0;
+  else  /* aligned points */
+      return 0;
+}
+
+_Bool pred_incirclefast_strict(pa, pb, pc, pd)
+REAL *pa;
+REAL *pb;
+REAL *pc;
+REAL *pd;
+{
+  REAL orientation = orient2dfast(pa, pb, pc);
+  if(orientation > 0.0)
+      return incirclefast(pa, pb, pc, pd) > 0.0;
+  else if(orientation < 0.0)
+      return incirclefast(pa, pc, pb, pd) > 0.0;
+  else  /* aligned points */
+      return 0;
+}
+
+_Bool pred_incircle_strict(pa, pb, pc, pd)
+REAL *pa;
+REAL *pb;
+REAL *pc;
+REAL *pd;
+{
+  REAL orientation = orient2d(pa, pb, pc);
+  if(orientation > 0.0)
+      return incircle(pa, pb, pc, pd) > 0.0;
+  else if(orientation < 0.0)
+      return incircle(pa, pc, pb, pd) > 0.0;
+  else  /* aligned points */
+      return 0;
+}
+
+/*****************************************************************************/
+/*                                                                           */
+/*  pred_inspherefast()   Approximate 3D insphere test.  Nonrobust.          */
+/*  pred_insphere()   Adaptive exact 3D insphere test.  Robust.              */
+/*  pred_inspherefast_strict()   Approximate 3D insphere test.  Nonrobust.   */
+/*  pred_insphere_strict()   Adaptive exact 3D insphere test.  Robust.       */
+/*                                                                           */
+/*               Return True if the point pe lies inside the                 */
+/*               sphere passing through pa, pb, pc, and pd; False            */
+/*               if it lies outside; and True if the five points are         */
+/*               cospherical.  If the points pa, pb, pc, and pd are ordered  */
+/*               so that they have a positive orientation (as defined by     */
+/*               orient3d()), the sign of the result will be reversed.       */
+/*                                                                           */
+/*  strict versions return False when points are cocircular.                 */
+/*                                                                           */
+/*****************************************************************************/
+
+_Bool pred_inspherefast(pa, pb, pc, pd, pe)
+REAL *pa;
+REAL *pb;
+REAL *pc;
+REAL *pd;
+REAL *pe;
+{
+  if(orient3dfast(pa, pb, pc, pd) >= 0.0)
+      return inspherefast(pa, pb, pc, pd, pe) >= 0.0;
+  else
+      return inspherefast(pa, pc, pb, pd, pe) >= 0.0;
+}
+
+_Bool pred_insphere(pa, pb, pc, pd, pe)
+REAL *pa;
+REAL *pb;
+REAL *pc;
+REAL *pd;
+REAL *pe;
+{
+  if(orient3d(pa, pb, pc, pd) >= 0.0)
+      return insphere(pa, pb, pc, pd, pe) >= 0.0;
+  else
+      return insphere(pa, pc, pb, pd, pe) >= 0.0;
+}
+
+_Bool pred_inspherefast_strict(pa, pb, pc, pd, pe)
+REAL *pa;
+REAL *pb;
+REAL *pc;
+REAL *pd;
+REAL *pe;
+{
+  if(orient3dfast(pa, pb, pc, pd) >= 0.0)
+      return inspherefast(pa, pb, pc, pd, pe) > 0.0;
+  else
+      return inspherefast(pa, pc, pb, pd, pe) > 0.0;
+}
+
+_Bool pred_insphere_strict(pa, pb, pc, pd, pe)
+REAL *pa;
+REAL *pb;
+REAL *pc;
+REAL *pd;
+REAL *pe;
+{
+  if(orient3d(pa, pb, pc, pd) >= 0.0)
+      return insphere(pa, pb, pc, pd, pe) > 0.0;
+  else
+      return insphere(pa, pc, pb, pd, pe) > 0.0;
+}

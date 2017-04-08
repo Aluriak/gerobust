@@ -7,7 +7,7 @@ import os
 import ctypes
 
 
-PREDICATES_C_LIB = os.path.join(os.path.dirname(__file__), 'predicates.so')
+PREDICATES_C_LIB = os.path.join(os.path.dirname(__file__), 'lib_predicates.so')
 PREDICATES = ctypes.cdll.LoadLibrary(PREDICATES_C_LIB)
 FUNCTIONS = (
     'orient2d',
@@ -19,6 +19,16 @@ FUNCTIONS = (
     'insphere',
     'inspherefast',
 )
+PREDICATES_NAMES = (
+    'pred_incirclefast',
+    'pred_incircle',
+    'pred_incirclefast_strict',
+    'pred_incircle_strict',
+    'pred_inspherefast',
+    'pred_insphere',
+    'pred_inspherefast_strict',
+    'pred_insphere_strict',
+)
 # input data for all functions
 coordinates = ctypes.c_double * 2
 
@@ -26,9 +36,11 @@ coordinates = ctypes.c_double * 2
 # Initialization of the C lib.
 def _init():
     PREDICATES.exactinit()
-    # set return types
+    # set retur  n types
     for func in FUNCTIONS:
         getattr(PREDICATES, func).restype = ctypes.c_double
+    for func in PREDICATES_NAMES:
+        getattr(PREDICATES, func).restype = ctypes.c_bool
 _init()
 
 
@@ -125,7 +137,7 @@ def incirclefast(pa:(float, float), pb:(float, float),
     The points pa, pb, and pc must be in counterclockwise
     order, or the sign of the result will be reversed.
 
-    Do not use exact arithmetic, therefore is quicker than orientation_3d.
+    Do not use exact arithmetic, therefore is quicker than incircle.
 
     """
     return PREDICATES.incirclefast(coordinates(*pa), coordinates(*pb),
@@ -165,7 +177,7 @@ def inspherefast(pa:(float, float), pb:(float, float), pc:(float, float),
     so that they have a positive orientation,
     or the sign of the result will be reversed.
 
-    Do not use exact arithmetic, therefore is quicker than orientation_3d.
+    Do not use exact arithmetic, therefore is quicker than insphere.
 
     """
     return PREDICATES.inspherefast(coordinates(*pa), coordinates(*pb),
