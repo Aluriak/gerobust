@@ -1,4 +1,4 @@
-"""Wrapper around computations.c file.
+"""Wrapper around predicates.c file.
 
 """
 
@@ -7,7 +7,7 @@ import os
 import ctypes
 
 
-PREDICATES_C_LIB = os.path.join(os.path.dirname(__file__), 'computations.so')
+PREDICATES_C_LIB = os.path.join(os.path.dirname(__file__), 'predicates.so')
 PREDICATES = ctypes.cdll.LoadLibrary(PREDICATES_C_LIB)
 FUNCTIONS = (
     'orient2d',
