@@ -30,7 +30,6 @@ reqs = [str(ir.req) for ir in install_reqs]
 
 ext_predicates = Extension(
     SRC_DIR + '._wrapped_predicates',
-    # '_wrapped_predicates',
     [SRC_DIR + '/predicates.c', SRC_DIR + '/predicates.i'],
     extra_compile_args = ['-O3', '-frounding-math', '-fsignaling-nans'],
     libraries=['c'],
