@@ -10,7 +10,7 @@ test:
 
 
 compile:  # the C code
-	gcc -frounding-math -fsignaling-nans $(PACKAGE)/predicates.c -fPIC --shared -o $(PACKAGE)/predicates.so
+	gcc -O3 -frounding-math -fsignaling-nans $(PACKAGE)/predicates.c -fPIC --shared -o $(PACKAGE)/lib_predicates.so
 
 
 test_register:
