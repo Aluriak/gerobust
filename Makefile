@@ -10,7 +10,8 @@ test:
 
 
 compile:  # the C code
-	gcc -O3 -frounding-math -fsignaling-nans $(PACKAGE)/predicates.c -fPIC --shared -o $(PACKAGE)/lib_predicates.so
+	swig -python $(PACKAGE)/geolib.i
+	gcc -O3 -frounding-math -fsignaling-nans $(PACKAGE)/geolib.c -fPIC --shared -o $(PACKAGE)/geolib.so
 
 
 test_register:

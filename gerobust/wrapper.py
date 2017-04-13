@@ -1,4 +1,4 @@
-"""Wrapper around predicates.c file.
+"""Wrapper around geolib.c file.
 
 """
 
@@ -6,42 +6,11 @@
 import os
 import ctypes
 
+from gerobust import _wrapped_geolib as GEOLIB
 
-PREDICATES_C_LIB = os.path.join(os.path.dirname(__file__), 'lib_predicates.so')
-PREDICATES = ctypes.cdll.LoadLibrary(PREDICATES_C_LIB)
-FUNCTIONS = (
-    'orient2d',
-    'orient2dfast',
-    'orient3d',
-    'orient3dfast',
-    'incircle',
-    'incirclefast',
-    'insphere',
-    'inspherefast',
-)
-PREDICATES_NAMES = (
-    'pred_incirclefast',
-    'pred_incircle',
-    'pred_incirclefast_strict',
-    'pred_incircle_strict',
-    'pred_inspherefast',
-    'pred_insphere',
-    'pred_inspherefast_strict',
-    'pred_insphere_strict',
-)
-# input data for all functions
+
+GEOLIB.exactinit()
 coordinates = ctypes.c_double * 2
-
-
-# Initialization of the C lib.
-def _init():
-    PREDICATES.exactinit()
-    # set retur  n types
-    for func in FUNCTIONS:
-        getattr(PREDICATES, func).restype = ctypes.c_double
-    for func in PREDICATES_NAMES:
-        getattr(PREDICATES, func).restype = ctypes.c_bool
-_init()
 
 
 def orientation_fast(pa:(float, float), pb:(float, float), pc:(float, float)) -> float:
@@ -57,7 +26,7 @@ def orientation_fast(pa:(float, float), pb:(float, float), pc:(float, float)) ->
     Do not use exact arithmetic, therefore is quicker than orientation.
 
     """
-    return PREDICATES.orient2dfast(coordinates(*pa), coordinates(*pb), coordinates(*pc))
+    return GEOLIB.orient2dfast(pa, pb, pc)
 
 def orientation(pa:(float, float), pb:(float, float), pc:(float, float)) -> float:
     """Adaptive exact 2D orientation test. Robust.
@@ -79,7 +48,7 @@ def orientation(pa:(float, float), pb:(float, float), pc:(float, float)) -> floa
     but will run more slowly when the input points are collinear or nearly so.
 
     """
-    return PREDICATES.orient2d(coordinates(*pa), coordinates(*pb), coordinates(*pc))
+    return GEOLIB.orient2d(pa, pb, pc)
 
 
 def orientation_3d_fast(pa:(float, float), pb:(float, float),
@@ -98,8 +67,8 @@ def orientation_3d_fast(pa:(float, float), pb:(float, float),
     Do not use exact arithmetic, therefore is quicker than orientation_3d.
 
     """
-    return PREDICATES.orient3dfast(coordinates(*pa), coordinates(*pb),
-                                   coordinates(*pc), coordinates(*pd))
+    return GEOLIB.orient3dfast(pa, pb,
+                               pc, pd)
 
 def orientation_3d(pa:(float, float), pb:(float, float),
                    pc:(float, float), pd:(float, float)) -> float:
@@ -123,8 +92,8 @@ def orientation_3d(pa:(float, float), pb:(float, float),
     nearly so.
 
     """
-    return PREDICATES.orient3d(coordinates(*pa), coordinates(*pb),
-                               coordinates(*pc), coordinates(*pd))
+    return GEOLIB.orient3d(pa, pb,
+                           pc, pd)
 
 
 def incirclefast(pa:(float, float), pb:(float, float),
@@ -140,8 +109,8 @@ def incirclefast(pa:(float, float), pb:(float, float),
     Do not use exact arithmetic, therefore is quicker than incircle.
 
     """
-    return PREDICATES.incirclefast(coordinates(*pa), coordinates(*pb),
-                                   coordinates(*pc), coordinates(*pd))
+    return GEOLIB.incirclefast(pa, pb,
+                               pc, pd)
 
 def incircle(pa:(float, float), pb:(float, float),
              pc:(float, float), pd:(float, float)) -> float:
@@ -162,8 +131,8 @@ def incircle(pa:(float, float), pb:(float, float),
     when the input points are cocircular or nearly so.
 
     """
-    return PREDICATES.incircle(coordinates(*pa), coordinates(*pb),
-                               coordinates(*pc), coordinates(*pd))
+    return GEOLIB.incircle(pa, pb,
+                           pc, pd)
 
 
 def inspherefast(pa:(float, float), pb:(float, float), pc:(float, float),
@@ -180,9 +149,9 @@ def inspherefast(pa:(float, float), pb:(float, float), pc:(float, float),
     Do not use exact arithmetic, therefore is quicker than insphere.
 
     """
-    return PREDICATES.inspherefast(coordinates(*pa), coordinates(*pb),
-                                   coordinates(*pc), coordinates(*pd),
-                                   coordinates(*pe))
+    return GEOLIB.inspherefast(pa, pb,
+                               pc, pd,
+                               pe)
 
 def insphere(pa:(float, float), pb:(float, float), pc:(float, float),
              pd:(float, float), pe:(float, float)) -> float:
@@ -204,9 +173,9 @@ def insphere(pa:(float, float), pb:(float, float), pc:(float, float),
     when the input points are cospherical or nearly so.
 
     """
-    return PREDICATES.insphere(coordinates(*pa), coordinates(*pb),
-                               coordinates(*pc), coordinates(*pd),
-                               coordinates(*pe))
+    return GEOLIB.insphere(pa, pb,
+                           pc, pd,
+                           pe)
 
 
 # shortcuts

@@ -28,9 +28,9 @@ reqs = [str(ir.req) for ir in install_reqs]
 
 
 
-ext_predicates = Extension(
-    SRC_DIR + '._wrapped_predicates',
-    [SRC_DIR + '/predicates.c', SRC_DIR + '/predicates.i'],
+ext_geolib = Extension(
+    SRC_DIR + '._wrapped_geolib',
+    [SRC_DIR + '/geolib.c', SRC_DIR + '/geolib.i'],
     extra_compile_args = ['-O3', '-frounding-math', '-fsignaling-nans'],
     libraries=['c'],
     swig_opts=['-py3'],
@@ -45,7 +45,7 @@ setup(
     install_requires=reqs,
     zip_safe=False,
 
-    ext_modules=[ext_predicates],
+    ext_modules=[ext_geolib],
 
     author='lucas bourneuf',
     author_email='lucas.bourneuf@openmailbox.org',

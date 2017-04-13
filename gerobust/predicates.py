@@ -4,7 +4,7 @@
 
 
 from gerobust import wrapper
-from gerobust.wrapper import PREDICATES, coordinates
+from gerobust.wrapper import GEOLIB, coordinates
 
 
 def counter_clockwise_fast(pa:(float, float), pb:(float, float), pc:(float, float)) -> bool:
@@ -80,7 +80,7 @@ def orientation_3d_fast(pa:(float, float), pb:(float, float),
     Do not use exact arithmetic, therefore is quicker than orientation_3d.
 
     """
-    return PREDICATES.orient3dfast(coordinates(*pa), coordinates(*pb),
+    return GEOLIB.orient3dfast(coordinates(*pa), coordinates(*pb),
                                    coordinates(*pc), coordinates(*pd))
 
 def orientation_3d(pa:(float, float), pb:(float, float),
@@ -105,7 +105,7 @@ def orientation_3d(pa:(float, float), pb:(float, float),
     nearly so.
 
     """
-    return PREDICATES.orient3d(coordinates(*pa), coordinates(*pb),
+    return GEOLIB.orient3d(coordinates(*pa), coordinates(*pb),
                                coordinates(*pc), coordinates(*pd))
 
 
@@ -122,7 +122,7 @@ def incirclefast(pa:(float, float), pb:(float, float),
     Do not use exact arithmetic, therefore is quicker than incircle.
 
     """
-    return (PREDICATES.pred_incirclefast_strict if strict else PREDICATES.pred_incirclefast)(
+    return (GEOLIB.pred_incirclefast_strict if strict else GEOLIB.pred_incirclefast)(
         coordinates(*pa), coordinates(*pb), coordinates(*pc), coordinates(*pd)
     )
 
@@ -141,7 +141,7 @@ def incircle(pa:(float, float), pb:(float, float),
     when the input points are cocircular or nearly so.
 
     """
-    return (PREDICATES.pred_incircle_strict if strict else PREDICATES.pred_incircle)(
+    return (GEOLIB.pred_incircle_strict if strict else GEOLIB.pred_incircle)(
         coordinates(*pa), coordinates(*pb), coordinates(*pc), coordinates(*pd)
     )
 
@@ -160,7 +160,7 @@ def inspherefast(pa:(float, float), pb:(float, float), pc:(float, float),
     Do not use exact arithmetic, therefore is quicker than orientation_3d.
 
     """
-    return (PREDICATES.pred_inspherefast_strict if strict else PREDICATES.pred_inspherefast)(
+    return (GEOLIB.pred_inspherefast_strict if strict else GEOLIB.pred_inspherefast)(
         coordinates(*pa), coordinates(*pb), coordinates(*pc), coordinates(*pd), coordinates(*pe)
     )
 
@@ -184,6 +184,6 @@ def insphere(pa:(float, float), pb:(float, float), pc:(float, float),
     when the input points are cospherical or nearly so.
 
     """
-    return (PREDICATES.pred_insphere_strict if strict else PREDICATES.pred_insphere)(
+    return (GEOLIB.pred_insphere_strict if strict else GEOLIB.pred_insphere)(
         coordinates(*pa), coordinates(*pb), coordinates(*pc), coordinates(*pd), coordinates(*pe)
     )
