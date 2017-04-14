@@ -12,3 +12,6 @@ dist/
 build
 gerobust/geolib_wrap.c
 gerobust/wrapped_geolib.py
+gerobust/_wrapped_geolib.c
+gerobust/_wrapped_geolib.o
+
