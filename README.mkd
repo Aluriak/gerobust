@@ -3,8 +3,16 @@ Python extension of the C implementation of robust and quick incircles tests,
 produced by [Janathan Richard Shewchuk](https://www.cs.cmu.edu/~quake/robust.html) and explained in its paper *Robust Adaptive Floating-Point Geometric Predicates*.
 
 ## usage example
-(see more in [tests](gerobust/test/) and [examples](examples/))
+(see more in [tests](test/))
 
+    from gerobust.predicates import clockwise, counter_clockwise, incircle
+
+    triangle = (0, 0), (0, 1), (1, 0)
+
+    print(clockwise(*triangle))  # True
+    print(counter_clockwise.fast(*triangle))  # False
+    print(incircle(*triangle, (1, 1)))  # False
+    print(incircle(*triangle, (1, 1), strict=False))  # True
 
 
 ## installation
