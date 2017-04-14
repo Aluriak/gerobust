@@ -7,7 +7,7 @@ all:
 
 t: tests
 tests:
-	- $(PYTHON) setup.py build_ext -i
+	$(PYTHON) setup.py build_ext -i
 	pytest $(TEST_DIR) -v
 
 

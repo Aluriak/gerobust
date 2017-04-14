@@ -9,7 +9,7 @@ ffi = FFI()
 SOURCE = os.path.join(os.path.split(__file__)[0], 'geolib.c')
 
 with open(SOURCE) as sfd:
-    ffi.set_source("gerobust._wrapped_geolib.py", sfd.read(),
+    ffi.set_source("gerobust._wrapped_geolib", sfd.read(),
                    extra_compile_args=['-O3', '-frounding-math', '-fsignaling-nans'],
                    libraries=['c'])
 
