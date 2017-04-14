@@ -6,7 +6,7 @@
 import os
 import ctypes
 
-from gerobust import _wrapped_geolib as GEOLIB
+from gerobust._wrapped_geolib import lib as GEOLIB
 
 
 GEOLIB.exactinit()
