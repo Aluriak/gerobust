@@ -107,8 +107,8 @@ def orientation_3d(pa:(float, float), pb:(float, float),
     return GEOLIB.orient3d(pa, pb, pc, pd)
 
 
-def incirclefast(pa:(float, float), pb:(float, float),
-                 pc:(float, float), pd:(float, float), strict:bool=True) -> bool:
+def incircle_fast(pa:(float, float), pb:(float, float),
+                  pc:(float, float), pd:(float, float), strict:bool=True) -> bool:
     """Approximate 2D incircle test. Nonrobust.
 
     Return True if the point pd lies inside the
@@ -144,8 +144,8 @@ def incircle(pa:(float, float), pb:(float, float),
     )
 
 
-def inspherefast(pa:(float, float), pb:(float, float), pc:(float, float),
-                 pd:(float, float), pe:(float, float), strict:bool=True) -> bool:
+def insphere_fast(pa:(float, float), pb:(float, float), pc:(float, float),
+                  pd:(float, float), pe:(float, float), strict:bool=True) -> bool:
     """Approximate 3D insphere test. Nonrobust.
 
     Return a positive value if the point pe lies inside the
@@ -189,6 +189,6 @@ def insphere(pa:(float, float), pb:(float, float), pc:(float, float),
 
 # shortcuts
 clockwise.fast = clockwise_fast
-counterclockwise.fast = counterclockwise_fast
+counter_clockwise.fast = counter_clockwise_fast
 incircle.fast = incircle_fast
 insphere.fast = insphere_fast
