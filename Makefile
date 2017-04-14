@@ -1,12 +1,13 @@
 PYTHON=python3
 PACKAGE=gerobust
+TEST_DIR=test/
 
 all: compile
 	$(PYTHON) -m $(PACKAGE)
 
 t: tests
 tests: compile
-	pytest $(PACKAGE) -v --ignore=venv/ --doctest-module
+	pytest $(PACKAGE) $(TEST_DIR) -v --doctest-module
 
 
 compile:  # the C code
