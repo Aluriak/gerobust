@@ -147,9 +147,7 @@ def inspherefast(pa:(float, float), pb:(float, float), pc:(float, float),
     Do not use exact arithmetic, therefore is quicker than insphere.
 
     """
-    return GEOLIB.inspherefast(pa, pb,
-                               pc, pd,
-                               pe)
+    return GEOLIB.inspherefast(pa, pb, pc, pd, pe)
 
 def insphere(pa:(float, float), pb:(float, float), pc:(float, float),
              pd:(float, float), pe:(float, float)) -> float:
@@ -171,9 +169,7 @@ def insphere(pa:(float, float), pb:(float, float), pc:(float, float),
     when the input points are cospherical or nearly so.
 
     """
-    return GEOLIB.insphere(pa, pb,
-                           pc, pd,
-                           pe)
+    return GEOLIB.insphere(pa, pb, pc, pd, pe)
 
 
 # shortcuts
