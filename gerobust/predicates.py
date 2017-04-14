@@ -59,6 +59,9 @@ def clockwise(pa:(float, float), pb:(float, float), pc:(float, float)) -> bool:
     Hence, this function is usually quite fast,
     but will run more slowly when the input points are collinear or nearly so.
 
+    >>> clockwise((0, 0), (0, 50), (50, 50))
+    True
+
     """
     orient = wrapper.orientation(pa, pb, pc)
     return None if not orient else (orient < 0)
