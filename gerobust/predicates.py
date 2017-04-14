@@ -80,8 +80,7 @@ def orientation_3d_fast(pa:(float, float), pb:(float, float),
     Do not use exact arithmetic, therefore is quicker than orientation_3d.
 
     """
-    return GEOLIB.orient3dfast(coordinates(*pa), coordinates(*pb),
-                                   coordinates(*pc), coordinates(*pd))
+    return GEOLIB.orient3dfast(pa, pb, pc, pd)
 
 def orientation_3d(pa:(float, float), pb:(float, float),
                    pc:(float, float), pd:(float, float)) -> bool:
@@ -105,8 +104,7 @@ def orientation_3d(pa:(float, float), pb:(float, float),
     nearly so.
 
     """
-    return GEOLIB.orient3d(coordinates(*pa), coordinates(*pb),
-                               coordinates(*pc), coordinates(*pd))
+    return GEOLIB.orient3d(pa, pb, pc, pd)
 
 
 def incirclefast(pa:(float, float), pb:(float, float),
@@ -123,7 +121,7 @@ def incirclefast(pa:(float, float), pb:(float, float),
 
     """
     return (GEOLIB.pred_incirclefast_strict if strict else GEOLIB.pred_incirclefast)(
-        coordinates(*pa), coordinates(*pb), coordinates(*pc), coordinates(*pd)
+        pa, pb, pc, pd
     )
 
 def incircle(pa:(float, float), pb:(float, float),
@@ -142,7 +140,7 @@ def incircle(pa:(float, float), pb:(float, float),
 
     """
     return (GEOLIB.pred_incircle_strict if strict else GEOLIB.pred_incircle)(
-        coordinates(*pa), coordinates(*pb), coordinates(*pc), coordinates(*pd)
+        pa, pb, pc, pd
     )
 
 
@@ -161,7 +159,7 @@ def inspherefast(pa:(float, float), pb:(float, float), pc:(float, float),
 
     """
     return (GEOLIB.pred_inspherefast_strict if strict else GEOLIB.pred_inspherefast)(
-        coordinates(*pa), coordinates(*pb), coordinates(*pc), coordinates(*pd), coordinates(*pe)
+        pa, pb, pc, pd, pe
     )
 
 def insphere(pa:(float, float), pb:(float, float), pc:(float, float),
@@ -185,5 +183,5 @@ def insphere(pa:(float, float), pb:(float, float), pc:(float, float),
 
     """
     return (GEOLIB.pred_insphere_strict if strict else GEOLIB.pred_insphere)(
-        coordinates(*pa), coordinates(*pb), coordinates(*pc), coordinates(*pd), coordinates(*pe)
+        pa, pb, pc, pd, pe
     )

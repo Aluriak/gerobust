@@ -131,8 +131,7 @@ def incircle(pa:(float, float), pb:(float, float),
     when the input points are cocircular or nearly so.
 
     """
-    return GEOLIB.incircle(pa, pb,
-                           pc, pd)
+    return GEOLIB.incircle(pa, pb, pc, pd)
 
 
 def inspherefast(pa:(float, float), pb:(float, float), pc:(float, float),
