@@ -113,10 +113,7 @@
 /*                                                                           */
 /*****************************************************************************/
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <sys/time.h>
+#include "geolib.h"
 
 /* On some machines, the exact arithmetic routines might be defeated by the  */
 /*   use of internal extended precision floating-point registers.  Sometimes */
@@ -4281,7 +4278,7 @@ REAL *pe;
 /*                                                                           */
 /*****************************************************************************/
 
-_Bool pred_incirclefast(pa, pb, pc, pd)
+bool pred_incirclefast(pa, pb, pc, pd)
 REAL *pa;
 REAL *pb;
 REAL *pc;
@@ -4296,7 +4293,7 @@ REAL *pd;
       return 0;
 }
 
-_Bool pred_incircle(pa, pb, pc, pd)
+bool pred_incircle(pa, pb, pc, pd)
 REAL *pa;
 REAL *pb;
 REAL *pc;
@@ -4311,7 +4308,7 @@ REAL *pd;
       return 0;
 }
 
-_Bool pred_incirclefast_strict(pa, pb, pc, pd)
+bool pred_incirclefast_strict(pa, pb, pc, pd)
 REAL *pa;
 REAL *pb;
 REAL *pc;
@@ -4326,7 +4323,7 @@ REAL *pd;
       return 0;
 }
 
-_Bool pred_incircle_strict(pa, pb, pc, pd)
+bool pred_incircle_strict(pa, pb, pc, pd)
 REAL *pa;
 REAL *pb;
 REAL *pc;
@@ -4359,7 +4356,7 @@ REAL *pd;
 /*                                                                           */
 /*****************************************************************************/
 
-_Bool pred_inspherefast(pa, pb, pc, pd, pe)
+bool pred_inspherefast(pa, pb, pc, pd, pe)
 REAL *pa;
 REAL *pb;
 REAL *pc;
@@ -4372,7 +4369,7 @@ REAL *pe;
       return inspherefast(pa, pc, pb, pd, pe) >= 0.0;
 }
 
-_Bool pred_insphere(pa, pb, pc, pd, pe)
+bool pred_insphere(pa, pb, pc, pd, pe)
 REAL *pa;
 REAL *pb;
 REAL *pc;
@@ -4385,7 +4382,7 @@ REAL *pe;
       return insphere(pa, pc, pb, pd, pe) >= 0.0;
 }
 
-_Bool pred_inspherefast_strict(pa, pb, pc, pd, pe)
+bool pred_inspherefast_strict(pa, pb, pc, pd, pe)
 REAL *pa;
 REAL *pb;
 REAL *pc;
@@ -4398,7 +4395,7 @@ REAL *pe;
       return inspherefast(pa, pc, pb, pd, pe) > 0.0;
 }
 
-_Bool pred_insphere_strict(pa, pb, pc, pd, pe)
+bool pred_insphere_strict(pa, pb, pc, pd, pe)
 REAL *pa;
 REAL *pb;
 REAL *pc;
