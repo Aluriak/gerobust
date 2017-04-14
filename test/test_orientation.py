@@ -2,6 +2,8 @@
 
 import itertools
 from collections import deque
+
+import pytest
 from gerobust import orientation
 from gerobust import counter_clockwise, clockwise
 
@@ -17,6 +19,11 @@ def sliding(it:iter, size:int) -> iter:
 def test_sliding():
     assert ((1, 2, 3), (2, 3, 4)) == tuple(sliding((1, 2, 3, 4), size=3))
 
+def test_tuple_only():
+    # this is a limit of current implementation… thanks to SWIG.
+    with pytest.raises(TypeError) as excinfo:
+        orientation([0, 0], (0, 50), (50, 50))
+    assert str(excinfo.value) == 'expected a tuple or a list.'
 
 def test_clockwise():
     points = (0, 0), (0, 50), (50, 50)
