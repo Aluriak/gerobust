@@ -185,3 +185,10 @@ def insphere(pa:(float, float), pb:(float, float), pc:(float, float),
     return (GEOLIB.pred_insphere_strict if strict else GEOLIB.pred_insphere)(
         pa, pb, pc, pd, pe
     )
+
+
+# shortcuts
+clockwise.fast = clockwise_fast
+counterclockwise.fast = counterclockwise_fast
+incircle.fast = incircle_fast
+insphere.fast = insphere_fast
