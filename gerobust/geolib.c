@@ -642,7 +642,7 @@ float uniformfloatrand()
 /*                                                                           */
 /*****************************************************************************/
 
-void exactinit()
+void exactinit(void)
 {
   REAL half;
   REAL check, lastcheck;
