@@ -8,7 +8,7 @@ all:
 t: tests
 tests:
 	$(PYTHON) setup.py build_ext -i
-	pytest $(TEST_DIR) -v
+	pytest $(PACKAGE) $(TEST_DIR) -v --doctest-module
 
 
 register:
