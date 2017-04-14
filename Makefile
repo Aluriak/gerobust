@@ -4,21 +4,15 @@ PACKAGE=gerobust
 all: compile
 	$(PYTHON) -m $(PACKAGE)
 
-t: test
-test:
+t: tests
+tests: compile
 	pytest $(PACKAGE) -v --ignore=venv/ --doctest-module
 
 
 compile:  # the C code
 	swig -python $(PACKAGE)/geolib.i
-	gcc -O3 -frounding-math -fsignaling-nans $(PACKAGE)/geolib.c -fPIC --shared -o $(PACKAGE)/geolib.so
+	gcc -O3 -frounding-math -fsignaling-nans -I/usr/include/python3.5m $(PACKAGE)/geolib{,_wrap}.c -fPIC --shared -o $(PACKAGE)/_wrapped_geolib.so
 
-
-test_register:
-	$(PYTHON) setup.py register -r https://testpypi.python.org/pypi
-test_install:
-	$(PYTHON) setup.py sdist upload -r https://testpypi.python.org/pypi
-	$(PYTHON) -m pip install -U -i https://testpypi.python.org/pypi $(PACKAGE)
 
 register:
 	$(PYTHON) setup.py register
@@ -29,3 +23,9 @@ install:
 
 devel:
 	pip devel
+
+test_install:
+	- rm -r ./venv/lib/python3.5/site-packages/gerobust-*/
+	$(PYTHON) setup.py install
+	ls -Rc ./venv/lib/python3.5/site-packages/gerobust-*/
+	cd && $(PYTHON) -c "import gerobust"
