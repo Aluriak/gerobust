@@ -10,3 +10,5 @@ dist/
 *.so
 *.egg-info/
 build
+gerobust/geolib_wrap.c
+gerobust/wrapped_geolib.py
