@@ -19,18 +19,35 @@ produced by [Janathan Richard Shewchuk](https://www.cs.cmu.edu/~quake/robust.htm
 
     pip install gerobust
 
+### Tests
+
+    git clone git@github.com:Aluriak/gerobust.git
+    cd gerobust
+    make tests
 
 ## links
 [github](http://github.com/aluriak/gerobust) and [pypi](http://pypi.python.org/pypi/gerobust)
 
 
 ## Floating-point and compiler
-Because the technics used in the C code needs the compiler to work with the
+The technics used in the C code needs the compiler to work with the
 IEEE 754 floating-point standard.
 
 By looking about it in the web, i found [the gcc wiki](https://gcc.gnu.org/wiki/FloatingPointMath)
 that seems to get its full support (without micro optimization that could kill the C implementation)
 with the `-frounding-math -fsignaling-nans` options or the `#pragma STDC FENV ACCESS ON` pragma.
+
+The former [is used](gerobust/build_geolib.py#L33). I however expect that only gcc is handled with this library. IEEE 754 compliancy through a standard way should be a short-term goal.
+
+## Contributions
+Patches as PR and ideas as issues are welcome.
+
+Few ways to improve this lib :
+
+- more geometric applications of the global method, for a more complete library
+- compatibility with others compiler/OS
+- unit test showing the (¬)robustness of functions
+- general improvements over the python codebase (organization, style, efficiency, doc)
 
 
 ## Bibliography
