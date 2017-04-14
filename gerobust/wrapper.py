@@ -10,7 +10,6 @@ from gerobust import _wrapped_geolib as GEOLIB
 
 
 GEOLIB.exactinit()
-coordinates = ctypes.c_double * 2
 
 
 def orientation_fast(pa:(float, float), pb:(float, float), pc:(float, float)) -> float:

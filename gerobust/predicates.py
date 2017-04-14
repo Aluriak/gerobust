@@ -4,7 +4,7 @@
 
 
 from gerobust import wrapper
-from gerobust.wrapper import GEOLIB, coordinates
+from gerobust.wrapper import GEOLIB
 
 
 def counter_clockwise_fast(pa:(float, float), pb:(float, float), pc:(float, float)) -> bool:
