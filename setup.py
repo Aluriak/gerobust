@@ -1,5 +1,5 @@
 import os
-from setuptools   import setup, find_packages, Extension
+from setuptools   import setup, find_packages
 from pip.req      import parse_requirements
 from pip.download import PipSession
 
@@ -27,25 +27,16 @@ install_reqs = parse_requirements(path_to('requirements.txt'),
 reqs = [str(ir.req) for ir in install_reqs]
 
 
-
-ext_geolib = Extension(
-    SRC_DIR + '._wrapped_geolib',
-    [SRC_DIR + '/geolib.c', SRC_DIR + '/geolib.i'],
-    extra_compile_args = ['-O3', '-frounding-math', '-fsignaling-nans'],
-    libraries=['c'],
-    swig_opts=['-py3'],
-)
-
-
 setup(
     name=__pkg_name__,
     version=__version__,
     packages=find_packages(),
     include_package_data=True,  # read the MANIFEST.in file
     install_requires=reqs,
+    setup_requires=["cffi>=1.0.0"],
     zip_safe=False,
 
-    ext_modules=[ext_geolib],
+    cffi_modules=["./gerobust/build_geolib.py:ffi"],
 
     author='lucas bourneuf',
     author_email='lucas.bourneuf@openmailbox.org',

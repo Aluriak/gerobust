@@ -113,7 +113,12 @@
 /*                                                                           */
 /*****************************************************************************/
 
-#include "geolib.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <sys/time.h>
+#include <stdbool.h>
+
 
 /* On some machines, the exact arithmetic routines might be defeated by the  */
 /*   use of internal extended precision floating-point registers.  Sometimes */
